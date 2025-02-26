@@ -1,0 +1,365 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Parkinsans", sans-serif;
+    box-sizing: border-box;
+}
+/* Cores */
+:root {
+    --page-bg: rgb(241, 240, 240);
+    --main-bg: white;
+    --main-color: black;
+    --details: rgb(255, 221, 0);
+    --grey: rgb(138, 138, 138);
+    --shadow-color: hsla(0, 0%, 0%, 0.16);
+}
+.darkmode {
+    --page-bg: rgb(22, 22, 22);
+    --main-bg: black;
+    --main-color: white;
+}
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: var(--page-bg);
+    color: var(--main-color)
+    /* background-color: black; */
+}
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+/* Seleção Personalizada */
+::selection {
+    background-color: var(--details);
+    color: var(--main-color);
+}
+.darkmode ::selection {
+    color: var(--main-bg);
+}
+/* Container Principal */
+.mainContent {
+    width: 700px;
+    height: 400px;
+    display: flex;
+    flex-flow: row wrap;
+    background-color: var(--main-bg);
+    box-shadow: 0 0 5px 5px var(--shadow-color);
+    border-radius: 40px;
+    position: relative;
+}
+/* Container com os forms */
+.forms {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+/* Divisão dos forms  */
+.form {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+/* Estilos do form de login */
+.telaForm {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+    align-items: center;
+    height: auto;
+    gap: 10px;
+    width: 80%;
+    transition: all 0.6s ease-in-out;
+}
+.divCep {
+    width: 100%;
+}
+/* Estilos dos inputs do form de login */
+/*.telaLogin #email, .telaLogin #senha, .telaCadastro #nome, .telaCadastro #email, .telaCadastro #senha*/.inputText {
+    padding: 10px 15px;
+    background-color: var(--page-bg);
+    border: none;
+    outline: none;
+    border-radius: 30px;
+    width: 100%;
+    transition: all 0.3s ease;
+    &:focus {
+        box-shadow: 2px 2px 2px 2px var(--shadow-color);
+    }
+}
+.inline .inputText:nth-child(1) {
+    width: 45%;
+}
+.inline {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+}
+.telaForm .mensagemErro {
+    font-size: 12px;
+    align-self: flex-start;
+    margin-left: 5px;
+}
+.darkmode .inputText {
+    color: var(--main-color);
+    background-color: var(--main-bg);
+    outline: solid 2px var(--page-bg);
+}
+/* Estilos do link do form de login */
+.telaForm1 a {
+    font-size: 10px;
+    text-decoration: none;
+    color: var(--grey);
+}
+/* Estilos do botão do form de login */
+.forms .botao-form {
+    padding: 10px 15px;
+    border-radius: 30px;
+    outline: 0;
+    border: 0;
+    background-color: var(--main-color);
+    border: 2px var(--main-color) solid;
+    color: var(--details);
+    transition: all 0.3s ease;
+    &:hover {
+        cursor: pointer;
+        background-color: var(--details);
+        color: var(--main-color);
+        border: 2px var(--details) solid;
+    }
+}
+.darkmode .forms .botao-form {
+    background-color: var(--main-bg);
+    border: 2px var(--details) solid;
+    color: var(--details);
+    &:hover {
+        background-color: var(--details);
+        color: var(--main-bg);
+        border: 2px var(--details) solid;
+    }
+}
+/* Estilos da tela de cadastro */
+.telaForm2 {
+    transform: translateX(-50%);
+    opacity: 0;
+}
+/* Animações da classe active */
+.mainContent.active {
+    & .alternar-container {
+        transform: translateX(-100%);
+        border-radius: 40px 0 0 40px;
+    }
+    & .alternar, .telaForm1, .mensagem2 {
+        transform: translateX(50%);
+    }
+    & .mensagem1, .telaForm2 {
+        transform: translateX(0);
+    }
+    & .telaForm1 {
+        opacity: 0;
+    }
+    & .telaForm2 {
+        opacity: 100%;
+    }
+}
+.mainContent.unactive {
+    & .telaForm2, .mensagem1 {
+        transform: translateX(-50%);
+    }
+    & .telaForm2 {
+        opacity: 0;
+    }
+    & .mensagem2 {
+        transform: translateX(0);
+    }
+}
+/* Divisão de convites, o quadrado animado */
+.alternar-container {
+    width: 50%;
+    height: 400px;
+    z-index: 1000;
+    border-radius: 0 40px 40px 0;
+    /* border-radius: 0 35px 35px 0; */
+    position: absolute;
+    top: 0;
+    left: 50%;
+    overflow: hidden;
+    transition: all 0.6s ease-in-out;
+}
+/* Camada Invisível, com os dois convites */
+.alternar {
+    height: 100%;
+    position: relative;
+    background-color: var(--main-color);;
+    left: -100%;
+    width: 200%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.6s ease-in-out;
+}
+/* Estilo para os dois convites */
+.painel {
+    position: absolute;
+    width: 50%;
+    gap: 15px;
+    height: auto;
+    transition: all 0.6s ease-in-out;
+}
+/* Estilos do convite de login */
+.mensagem1 {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+    align-items: center;
+    height: auto;
+    padding: 0 15px;
+    left: 0;
+    color: var(--main-bg);
+    transform: translateX(-50%);
+    & p {
+        text-align: center;
+    }
+}
+/* Estilos pro botão de convite de login */
+.mensagem1 .botao-mensagem1, .mensagem2 .botao-mensagem2 {
+    padding: 10px 15px;
+    border-radius: 30px;
+    border: 2px var(--details) solid;
+    background-color: var(--main-color);
+    color: var(--details);
+    transition: all 0.3s ease-in-out;
+    &:hover {
+        cursor: pointer;
+        background-color: var(--details);
+        color: var(--main-color);
+    }
+}
+.darkmode .mensagem1 .botao-mensagem1, .darkmode .mensagem2 .botao-mensagem2 {
+    background-color: var(--main-bg);
+    border: 2px var(--main-bg) solid;
+    &:hover {
+        background-color: var(--details);
+        color: var(--main-bg);
+        border: 2px var(--details) solid;
+    }
+}
+/* Estilos pro convite de cadastro */
+.mensagem2 {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+    align-items: center;
+    height: auto;
+    color: var(--main-bg);
+    padding: 0 15px;
+    right: 0;
+    & p {
+        text-align: center;
+    }
+}
+/* Botão Dark Mode */
+.botaoDark {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--main-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    transition: all 0.6s ease;
+    & svg {
+        fill: var(--main-bg);
+    }
+    &:hover {
+        transform: scale(1.05);
+        cursor: pointer;
+    }
+}
+.botaoDark svg:last-child {
+    display: none;
+}
+.darkmode .botaoDark svg:first-child {
+    display: none;
+}
+.darkmode .botaoDark svg:last-child {
+    display: block;
+}
+/* Mapa */
+#mapa {
+    width: 50%;
+    height: 100%;
+    transform: translateX(100%);
+    z-index: 2;
+}
+/* Marcador */
+.marker {
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
+@media (max-width: 720px) {
+    .mainContent {
+        flex-flow: column wrap;
+        height: 500px;
+        margin: 0 30px;
+    }
+    .form {
+        width: 100%;
+        height: 50%;
+    }
+    .forms {
+        flex-flow: column wrap;
+    }
+    .telaForm {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-rows: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr);
+        & .textoCep {
+            width: 100%;
+            grid-column: 1 / span 2;
+            text-align: center;
+        }
+    }
+    .botao-form {
+        grid-column: 1 / span 2;
+    }
+    .inline {
+        width: 100%;
+    }
+    .divCep {
+        width: 100%;
+        & .inputText {
+            width: 100%;
+        }
+    }
+    .inputText {
+        width: 100%;
+    }
+    .alternar-container {
+        width: 100%;
+        height: 50%;
+        top: auto;
+        left: 0;
+        bottom: 0;
+        transform: translateX(0);
+        z-index: 3;
+        border-radius: 0 0 40px 40px;
+    }
+    .alternar {
+        width: 200%;
+        height: 100%;
+    }
+}
